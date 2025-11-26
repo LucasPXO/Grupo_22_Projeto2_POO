@@ -1,5 +1,5 @@
 public class Jogador {
-
+    
     private Local localAtual;
     // ... inventario, diarioPistas ...
 
@@ -28,7 +28,9 @@ public class Jogador {
             this.localAtual = proximoLocal;
             
             // 4. Mostra a descrição do novo local (importante!)
-            System.out.println(this.localAtual.getDescricao());
+            System.out.println("\n=== " + proximoLocal.getNome() + " ===");
+            System.out.println(proximoLocal.mostrarInfo()); 
+
         }
     }
 
@@ -37,7 +39,7 @@ public class Jogador {
      */
     
     public String olhar() {
-        return localAtual.getDescricao();
+        return localAtual.mostrarInfo();
     }
     public String inspecionar(String argumento) {
         //  Implementar a lógica de inspeção

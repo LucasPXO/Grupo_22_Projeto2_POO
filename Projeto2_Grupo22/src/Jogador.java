@@ -2,7 +2,7 @@ import java.util.ArrayList; // <--- Importante
 import java.util.List;
 
 public class Jogador {
-
+    
     private Local localAtual;
     private List<Item> inventario;
     // ... inventario, diarioPistas ...
@@ -37,8 +37,10 @@ public class Jogador {
             // 3. Atualiza o local do jogador
             this.localAtual = proximoLocal;
             
-            // 4. Mostra a descrição do novo local
-            System.out.println(this.localAtual.getDescricao());
+            // 4. Mostra a descrição do novo local (importante!)
+            System.out.println("\n=== " + proximoLocal.getNome() + " ===");
+            System.out.println(proximoLocal.mostrarInfo()); 
+
         }
     }
 
@@ -47,7 +49,7 @@ public class Jogador {
      */
     
     public String olhar() {
-        return localAtual.getDescricao();
+        return localAtual.mostrarInfo();
     }
     
     /**

@@ -1,26 +1,41 @@
 import java.util.Scanner;
+import java.util.ArrayList; 
+import java.util.List;
 
 public class GameLoop {
 
     private Jogador jogador;
     private final Parser parser; // Uma classe que ajuda a entender os comandos
     private boolean jogoEmCurso;
+    private List<NPC> todosNpcs;
 
     public GameLoop() {
-        criarMundo(); // Chama o método que cria os locais e o jogador
+  
         this.parser = new Parser();
         this.jogoEmCurso = true;
+        this.todosNpcs = new ArrayList<>();
+        criarMundo(); // Chama o método que cria os locais e o jogador
     }
     
     private void criarMundo() {
         // Exemplos de Inicialização(debug)**
         
         // 1. Criar os locais
-        Local ruaBaker = new Local("Está na 221B Baker Street, o seu escritório.");
-        Local cenaDoCrime = new Local("Está numa viela escura. Há uma silhueta no chão.");
-        Local delegacia = new Local("Está na Scotland Yard, o inspetor Lestrade parece impaciente.");
-        Local mansao = new Local("Está nos portões de uma mansão imponente.");
+        Local ruaBaker = new Local("Está na 221B Baker Street, o seu escritório.", "Rua Baker");
+        Local cenaDoCrime = new Local("Está numa viela escura. Há uma silhueta no chão.", "Beco");
+        Local delegacia = new Local("Está na Scotland Yard, o inspetor Lestrade parece impaciente.", "Delegacia");
+        Local mansao = new Local("Está nos portões de uma mansão imponente.", "Mansão");
 
+        NPC cidadao = new NPC("Cidadao", ruaBaker);
+        NPC cao = new NPC("Cao", ruaBaker);
+        NPC lestrade = new NPC("Inspetor Lestrade", delegacia);
+        NPC mordomo = new NPC("Mordomo", mansao);
+        
+        todosNpcs.add(cidadao);         
+        todosNpcs.add(lestrade);     
+        todosNpcs.add(mordomo); 
+        todosNpcs.add(cao);
+        
         // 2. Ligar as saídas (ex: de Baker Street pode ir para a "cena" ou "delegacia")
         ruaBaker.adicionarSaida("cena do crime", cenaDoCrime);
         ruaBaker.adicionarSaida("delegacia", delegacia);

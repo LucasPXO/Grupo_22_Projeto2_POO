@@ -18,6 +18,8 @@ public class GameLoop {
     }
     
     private void criarMundo() {
+        // Exemplos de Inicialização(debug)**
+        
         // 1. Criar os locais
         Local ruaBaker = new Local("Está na 221B Baker Street, o seu escritório.", "Rua Baker");
         Local cenaDoCrime = new Local("Está numa viela escura. Há uma silhueta no chão.", "Beco");
@@ -45,8 +47,16 @@ public class GameLoop {
         // 4. Ligar a mansão (ex: só se chega pela cena do crime)
         cenaDoCrime.adicionarSaida("mansao", mansao);
         mansao.adicionarSaida("cena do crime", cenaDoCrime);
+        
+        // 5. Adicionar Itens
+        Item lupa = new Item("Lupa", "Uma lupa antiga, boa para ver detalhes.");
+        Item faca = new Item("Faca", "Uma faca afiada encontrada no chão.");
 
-        // 5. Criar o jogador e colocá-lo no local inicial
+        // 6. Colocar itens nos locais
+        ruaBaker.adicionarItem(lupa);
+        cenaDoCrime.adicionarItem(faca);
+
+        // 7. Criar o jogador e colocá-lo no local inicial
         this.jogador = new Jogador(ruaBaker);
     }
 
@@ -95,27 +105,30 @@ public class GameLoop {
                 jogoEmCurso = false; // 
                 break;
             case "ajuda":
-                mostrarAjuda(); // [cite: 30]
+                mostrarAjuda(); //
                 break;
             case "ir":
-                jogador.mover(argumento); // [cite: 21]
+                jogador.mover(argumento); // 
                 break;
             case "olhar":
-                System.out.println(jogador.olhar()); // [cite: 22]
+                System.out.println(jogador.olhar()); // 
                 break;
             case "inspecionar":
-                System.out.println(jogador.inspecionar(argumento)); // [cite: 23]
+                System.out.println(jogador.inspecionar(argumento)); // 
                 break;
             case "falar":
-                System.out.println(jogador.falar(argumento)); // [cite: 24]
+                System.out.println(jogador.falar(argumento)); // 
                 break;
             case "inventario":
-                jogador.listarInventario(); // [cite: 26]
+                jogador.listarInventario(); // 
                 break;
             case "pistas":
-                jogador.listarPistas(); // [cite: 25]
+                jogador.listarPistas(); // 
                 break;
-            // Outros comandos como "usar", "examinar", "recolher" [cite: 17, 27, 28]
+            case "recolher":
+                jogador.recolher(argumento);// 
+                break;
+            // Outros comandos como "usar", "examinar", "recolher" 
             default:
                 System.out.println("Comando desconhecido.");
         }
@@ -125,6 +138,7 @@ public class GameLoop {
         System.out.println("Os seus comandos são:");
         System.out.println("   ir <local>");
         System.out.println("   olhar");
+        System.out.println("   recolher");
         System.out.println("   inspecionar <objeto>");
         System.out.println("   falar <npc>");
         System.out.println("   recolher <item>");

@@ -1,10 +1,15 @@
+import java.util.ArrayList; // <--- Importante
+import java.util.List;
+
 public class Jogador {
     
     private Local localAtual;
+    private List<Item> inventario;
     // ... inventario, diarioPistas ...
 
     public Jogador(Local localInicial) {
         this.localAtual = localInicial;
+        this.inventario = new ArrayList<>();
     }
 
     /**
@@ -12,8 +17,11 @@ public class Jogador {
      * @param direcao O argumento do comando "ir" (ex: "norte", "mansao")
      */
     public void mover(String direcao) {
-        if (direcao == null || direcao.isEmpty()) {
+        // Se a direção for nula ou vazia (apenas espaços)
+        if (direcao == null || direcao.trim().isEmpty()) {
             System.out.println("Ir para onde?");
+            // AQUI ESTÁ A MUDANÇA: Mostra as opções
+            System.out.println("Saídas possíveis: " + localAtual.getSaidasDisponiveis());
             return;
         }
 
@@ -23,6 +31,8 @@ public class Jogador {
         // 2. Verifica a resposta
         if (proximoLocal == null) {
             System.out.println("Não pode ir por aí.");
+            // Opcional: Mostrar as saídas também quando o jogador erra a direção
+            System.out.println("Tente: " + localAtual.getSaidasDisponiveis());
         } else {
             // 3. Atualiza o local do jogador
             this.localAtual = proximoLocal;
@@ -41,9 +51,37 @@ public class Jogador {
     public String olhar() {
         return localAtual.mostrarInfo();
     }
+    
+    /**
+     * Tenta apanhar um item do local atual.
+     */
+    public void recolher(String nomeItem) {
+        if (nomeItem == null) {
+            System.out.println("Recolher o quê?");
+            return;
+        }
+
+        // 1. Tenta tirar o item do chão (Local)
+        Item item = localAtual.removerItem(nomeItem);
+
+        // 2. Verifica se conseguiu
+        if (item != null) {
+            inventario.add(item); // 3. Guarda no inventário
+            System.out.println("Você apanhou: " + item.getNome());
+        } else {
+            System.out.println("Não vejo nenhum " + nomeItem + " aqui.");
+        }
+    }
+    
+    // Atualize o método inspecionar para ver itens do inventário também!
     public String inspecionar(String argumento) {
-        //  Implementar a lógica de inspeção
-        return "Não vê nada de especial no(a) " + argumento + ".";
+        // Verifica no inventário
+        for(Item i : inventario) {
+            if(i.getNome().equalsIgnoreCase(argumento)) {
+                return i.getDescricao();
+            }
+        }
+        return "Não tem ou não vê isso aqui.";
     }
 
     public String falar(String argumento) {
@@ -51,9 +89,18 @@ public class Jogador {
         return "Tenta falar com " + argumento + ", mas não obtém resposta.";
     }
 
+    /**
+     * Mostra o que o jogador carrega.
+     */
     public void listarInventario() {
-        // Implementar a lógica do inventário
-        System.out.println("O seu inventário está vazio.");
+        if (inventario.isEmpty()) {
+            System.out.println("O seu inventário está vazio.");
+        } else {
+            System.out.println("Inventário:");
+            for (Item i : inventario) {
+                System.out.println("- " + i.getNome());
+            }
+        }
     }
 
     public void listarPistas() {

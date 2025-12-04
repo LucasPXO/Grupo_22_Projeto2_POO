@@ -10,16 +10,19 @@ public class Local {
     private String descricao;
     private Map<String, Local> saidas; // Chave: "norte", "delegacia", etc. Valor: O objeto Local.
     private List<Item> itens;
+    private List<NPC> npcsNoLocal;
+
     
     public Local(String descricao) {
         this.descricao = descricao;
         this.saidas = new HashMap<>(); // Inicializa o mapa de saídas
         this.itens = new ArrayList<>();
-    private List<NPC> npcsNoLocal;
-
+        this.npcsNoLocal= new ArrayList<>();
+    }
     public Local(String descricao, String nome) {
         this.nome=nome;
         this.descricao = descricao;
+        this.itens= new ArrayList<>();
         this.saidas = new HashMap<>(); // Inicializa o mapa de saídas
         this.npcsNoLocal = new ArrayList<>();
     }
@@ -71,7 +74,10 @@ public class Local {
         }
         return null; // Não encontrou
     }
-
+    
+    public List<Item> getItens(Local local){
+        return local.itens;
+    }
     /**
      * Retorna a descrição, incluindo os itens visíveis.
      */
@@ -96,24 +102,44 @@ public class Local {
         // keySet() devolve todas as chaves do mapa (os nomes das direções)
         // toString() formata-as automaticamente como [norte, sul]
         return saidas.keySet().toString();
+    }
+    
      // MODIFICAR: não precisa mais receber lista
     public String mostrarInfo() {
-        StringBuilder info = new StringBuilder(descricao);
-        
-        if (!npcsNoLocal.isEmpty()) {
-            info.append("\n\nPersonagens presentes:");
-            for (NPC npc : npcsNoLocal) {
-                info.append("\n- ").append(npc.getNome());
-            }
-        }else{
-            info.append("\n Nenhum personagem presente.");
+    StringBuilder info = new StringBuilder(descricao);
+    
+    if (!npcsNoLocal.isEmpty()) {
+        info.append("\n\nPersonagens presentes:");
+        for (NPC npc : npcsNoLocal) {
+            info.append("\n- ").append(npc.getNome());
         }
-        
-        return info.toString();
+    } else {
+        info.append("\nNenhum personagem presente.");
+    }
+    
+    info.append("\n\nSaídas disponíveis: ");
+    if (!saidas.isEmpty()) {
+        for (String direcao : saidas.keySet()) {
+            info.append("\n- ").append(direcao);
+        }
+    } else {
+        info.append("\nNão existem saídas disponíveis.");
+    }
+    
+    info.append("\n Itens encontrados neste local: \n");
+    if (!itens.isEmpty()){
+        for(int i=0; i<itens.size();i++){
+            info.append(itens.get(i));
+        }
+    }else{
+        info.append("Não existem itens neste local.");
+    }
+    
+    return info.toString();
+    
     }    
-        public String getDescricao(){return descricao;}
-        public String getNome() {return nome;}
-        public List<NPC> getNpcsNoLocal() { return npcsNoLocal; }
+    public String getNome() {return nome;}
+    public List<NPC> getNpcsNoLocal() { return npcsNoLocal; }
     }
     //public NPC getNCS(){}
     

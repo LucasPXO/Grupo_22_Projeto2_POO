@@ -25,24 +25,72 @@ public class GameLoop {
         Local cenaDoCrime = new Local("Está numa viela escura. Há uma silhueta no chão.", "Beco");
         Local delegacia = new Local("Está na Scotland Yard, o inspetor Lestrade parece impaciente.", "Delegacia");
         Local mansao = new Local("Está nos portões de uma mansão imponente.", "Mansão");
-
+        Local loja = new Local("Acaba de entrar na loja do Sr.Manuel, que se encontra ao balcão a limpar alguns artigos.", "Loja");
+        Local armazem = new Local("Está dentro do armazém da loja do Sr.Manuel. Está escuro, empoeirado mas com um ar suspeito.", "Armazem");
+        Local barbearia = new Local("Entra na recém aberta barbearia do Lucas. É a mais popular da cidade.", "barbearia");
+        Local casa = new Local("Finalmente chegou a casa. Está cansado mas sabe que a busca ainda não terminou.", "casa");
+        Local escadaria = new Local("Uma alta escadaria. No topo, consegue ver uma floresta.", "escadaria");
+        Local floresta = new Local("Uma floresta densa, escura, fria e cheia de má reputação. Avance com cautela.", "floresta");
+        Local bar = new Local("Acaba de entrar no bar da Senhora Irlinda. O cheiro a bebida, comida quente e música de qualidade deixam-no confortável.", "bar");
+        
         NPC cidadao = new NPC("Cidadao", ruaBaker);
         NPC cao = new NPC("Cao", ruaBaker);
         NPC lestrade = new NPC("Inspetor Lestrade", delegacia);
         NPC mordomo = new NPC("Mordomo", mansao);
+        NPC srManuel = new NPC("Sr.Manuel", loja);
+        NPC lucas = new NPC("Lucas", barbearia);
+        NPC semAbrigo = new NPC("Sem Abrigo", escadaria);
+        NPC irlinda = new NPC("Sra.Irlinda", bar);
+        NPC joel = new NPC("Joel", bar);
         
         todosNpcs.add(cidadao);         
         todosNpcs.add(lestrade);     
         todosNpcs.add(mordomo); 
         todosNpcs.add(cao);
+        todosNpcs.add(srManuel);
+        todosNpcs.add(lucas);
+        todosNpcs.add(semAbrigo);
+        todosNpcs.add(irlinda);
+        todosNpcs.add(joel);
+        
         
         // 2. Ligar as saídas (ex: de Baker Street pode ir para a "cena" ou "delegacia")
         ruaBaker.adicionarSaida("cena do crime", cenaDoCrime);
         ruaBaker.adicionarSaida("delegacia", delegacia);
+        ruaBaker.adicionarSaida("loja", loja);
+        ruaBaker.adicionarSaida("bar", bar);
+        
         
         // 3. Ligar as saídas de volta
         cenaDoCrime.adicionarSaida("baker street", ruaBaker);
+        cenaDoCrime.adicionarSaida("floresta", floresta);
+        cenaDoCrime.adicionarSaida("bar", bar);
+        
         delegacia.adicionarSaida("baker street", ruaBaker);
+        delegacia.adicionarSaida("casa", casa);
+        delegacia.adicionarSaida("escadaria", escadaria);
+        
+        loja.adicionarSaida("baker street", ruaBaker);
+        loja.adicionarSaida("armazem", armazem);
+        loja.adicionarSaida("barbearia", barbearia);
+        
+        armazem.adicionarSaida("loja", loja);
+        
+        barbearia.adicionarSaida("loja", loja);
+        barbearia.adicionarSaida("casa", casa);
+        
+        casa.adicionarSaida("delegacia", delegacia);
+        casa.adicionarSaida("barbearia", barbearia);
+        
+        escadaria.adicionarSaida("delegacia", delegacia);
+        escadaria.adicionarSaida("floresta", floresta);
+        
+        floresta.adicionarSaida("escadaria",escadaria);
+        floresta.adicionarSaida("cena do crime", cenaDoCrime);
+        
+        bar.adicionarSaida("baker street", ruaBaker);
+        bar.adicionarSaida("cena do crime", cenaDoCrime);
+        
 
         // 4. Ligar a mansão (ex: só se chega pela cena do crime)
         cenaDoCrime.adicionarSaida("mansao", mansao);

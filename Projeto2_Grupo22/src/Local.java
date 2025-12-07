@@ -73,7 +73,10 @@ public class Local {
     public String getDescricao() {
         return descricao;
     }
-
+    
+    public List<Item> getItens(Local local){
+        return local.itens;
+    }
     /**
      * Método principal para mostrar o que há no local (Descrição + Itens + NPCs)
      */

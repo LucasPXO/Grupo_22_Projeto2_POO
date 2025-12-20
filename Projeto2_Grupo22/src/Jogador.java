@@ -84,9 +84,25 @@ public class Jogador {
         return "Não tem ou não vê isso aqui.";
     }
 
-    public String falar(String argumento) {
-        //  Implementar a lógica de diálogo
-        return "Tenta falar com " + argumento + ", mas não obtém resposta.";
+    public String falar(String nomeNPC) {
+        // 1. Verificar se o jogador escreveu um nome
+        if (nomeNPC == null || nomeNPC.trim().isEmpty()) {
+            return "Falar com quem?";
+        }
+
+        // 2. Obter a lista de NPCs no local atual
+        List<NPC> npcsNoLocal = localAtual.getNpcsNoLocal();
+
+        // 3. Procurar o NPC pelo nome
+        for (NPC npc : npcsNoLocal) {
+            if (npc.getNome().equalsIgnoreCase(nomeNPC)) {
+                // 4. Se encontrou, retorna a fala dele
+                return npc.getNome() + " diz: \"" + npc.getFala() + "\"";
+            }
+        }
+
+        // 5. Se não encontrou ninguém com esse nome
+        return "Não vês '" + nomeNPC + "' aqui.";
     }
 
     /**

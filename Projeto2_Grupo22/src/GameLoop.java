@@ -10,11 +10,16 @@ public class GameLoop {
     private List<NPC> todosNpcs;
 
     public GameLoop() {
-  
+        this.todosNpcs = new ArrayList<>(); // Garanta que isto está antes de criarMundo
+        criarMundo();
+        
+        // --- ADICIONE ISTO AQUI ---
+        CarregadorDialogos carregador = new CarregadorDialogos();
+        carregador.carregar("dialogos.rtf", todosNpcs);
+        // --------------------------
+        
         this.parser = new Parser();
         this.jogoEmCurso = true;
-        this.todosNpcs = new ArrayList<>();
-        criarMundo(); // Chama o método que cria os locais e o jogador
     }
     
     private void criarMundo() {
@@ -42,6 +47,7 @@ public class GameLoop {
         NPC semAbrigo = new NPC("Sem Abrigo", escadaria);
         NPC irlinda = new NPC("Sra.Irlinda", bar);
         NPC joel = new NPC("Joel", bar);
+        
         
         todosNpcs.add(cidadao);         
         todosNpcs.add(lestrade);     

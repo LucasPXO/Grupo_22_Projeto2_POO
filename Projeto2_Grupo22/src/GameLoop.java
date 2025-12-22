@@ -5,27 +5,26 @@ import java.util.List;
 public class GameLoop {
 
     private Jogador jogador;
-    private final Parser parser; // Uma classe que ajuda a entender os comandos
+    private Parser parser;
+    private Vocabulario vocabulario;  // ← NOVO
     private boolean jogoEmCurso;
     private List<NPC> todosNpcs;
 
     public GameLoop() {
-        this.todosNpcs = new ArrayList<>(); // Garanta que isto está antes de criarMundo
+        this.todosNpcs = new ArrayList<>();
         criarMundo();
         
-        // --- ADICIONE ISTO AQUI ---
         CarregadorDialogos carregador = new CarregadorDialogos();
         carregador.carregar("dialogos.rtf", todosNpcs);
-        // --------------------------
         
+        // ← NOVO: Inicializa o Vocabulário DEPOIS de criar o jogador
+        this.vocabulario = new Vocabulario(jogador, this);
         this.parser = new Parser();
         this.jogoEmCurso = true;
     }
     
     private void criarMundo() {
-        // Exemplos de Inicialização(debug)**
-        
-        // 1. Criar os locais
+        // Criar os locais
         Local ruaBaker = new Local("Está na 221B Baker Street, o seu escritório.", "Rua Baker");
         Local cenaDoCrime = new Local("Está numa viela escura. Há uma silhueta no chão.", "Beco");
         Local delegacia = new Local("Está na Scotland Yard, o inspetor Lestrade parece impaciente.", "Delegacia");
@@ -48,7 +47,6 @@ public class GameLoop {
         NPC irlinda = new NPC("Sra.Irlinda", bar);
         NPC joel = new NPC("Joel", bar);
         
-        
         todosNpcs.add(cidadao);         
         todosNpcs.add(lestrade);     
         todosNpcs.add(mordomo); 
@@ -59,18 +57,16 @@ public class GameLoop {
         todosNpcs.add(irlinda);
         todosNpcs.add(joel);
         
-        
-        // 2. Ligar as saídas (ex: de Baker Street pode ir para a "cena" ou "delegacia")
+        // Ligar as saídas
         ruaBaker.adicionarSaida("cena do crime", cenaDoCrime);
         ruaBaker.adicionarSaida("delegacia", delegacia);
         ruaBaker.adicionarSaida("loja", loja);
         ruaBaker.adicionarSaida("bar", bar);
         
-        
-        // 3. Ligar as saídas de volta
         cenaDoCrime.adicionarSaida("baker street", ruaBaker);
         cenaDoCrime.adicionarSaida("floresta", floresta);
         cenaDoCrime.adicionarSaida("bar", bar);
+        cenaDoCrime.adicionarSaida("mansao", mansao);
         
         delegacia.adicionarSaida("baker street", ruaBaker);
         delegacia.adicionarSaida("casa", casa);
@@ -97,44 +93,36 @@ public class GameLoop {
         bar.adicionarSaida("baker street", ruaBaker);
         bar.adicionarSaida("cena do crime", cenaDoCrime);
         
-
-        // 4. Ligar a mansão (ex: só se chega pela cena do crime)
-        cenaDoCrime.adicionarSaida("mansao", mansao);
         mansao.adicionarSaida("cena do crime", cenaDoCrime);
         
-        // 5. Adicionar Itens
+        // Adicionar Itens
         Item lupa = new Item("Lupa", "Uma lupa antiga, boa para ver detalhes.");
         Item faca = new Item("Faca", "Uma faca afiada encontrada no chão.");
 
-        // 6. Colocar itens nos locais
         ruaBaker.adicionarItem(lupa);
         cenaDoCrime.adicionarItem(faca);
 
-        // 7. Criar o jogador e colocá-lo no local inicial
+        // Criar o jogador
         this.jogador = new Jogador(ruaBaker);
     }
 
-    /**
-     * O loop principal do jogo.
-     */
     public void iniciar() {
         System.out.println("Bem-vindo ao Sherlock Holmes 25/26!");
         System.out.println("Escreva 'ajuda' para ver os comandos disponíveis.");
         System.out.println("---");
 
-        // Mostra a descrição inicial do primeiro local
         System.out.println(jogador.olhar()); 
 
         Scanner scanner = new Scanner(System.in);
         
         while (jogoEmCurso) {
-            System.out.print("> "); // Prompt para o utilizador
+            System.out.print("> ");
             String inputUtilizador = scanner.nextLine();
             
-            // 1. O Parser interpreta o input
+            // O Parser apenas extrai verbo e argumento
             Comando comando = parser.interpretar(inputUtilizador);
             
-            // 2. O GameLoop delega a execução
+            // ← MUDANÇA: Agora delega ao Vocabulário (SEM SWITCH!)
             executarComando(comando);
         }
         
@@ -142,9 +130,7 @@ public class GameLoop {
         System.out.println("Obrigado por jogar. Adeus!");
     }
 
-    /**
-     * Delega a ação com base no comando interpretado.
-     */
+    
     private void executarComando(Comando comando) {
         if (!comando.eValido()) {
             System.out.println("Não percebi o que quer dizer. Tente 'ajuda'.");
@@ -154,52 +140,20 @@ public class GameLoop {
         String verbo = comando.getVerbo();
         String argumento = comando.getArgumento();
 
-        switch (verbo) {
-            case "sair":
-                jogoEmCurso = false; // 
-                break;
-            case "ajuda":
-                mostrarAjuda(); //
-                break;
-            case "ir":
-                jogador.mover(argumento); // 
-                break;
-            case "olhar":
-                System.out.println(jogador.olhar()); // 
-                break;
-            case "inspecionar":
-                System.out.println(jogador.inspecionar(argumento)); // 
-                break;
-            case "falar":
-                System.out.println(jogador.falar(argumento)); // 
-                break;
-            case "inventario":
-                jogador.listarInventario(); // 
-                break;
-            case "pistas":
-                jogador.listarPistas(); // 
-                break;
-            case "recolher":
-                jogador.recolher(argumento);// 
-                break;
-            // Outros comandos como "usar", "examinar", "recolher" 
-            default:
-                System.out.println("Comando desconhecido.");
+        boolean sucesso = vocabulario.executarComando(verbo, argumento);
+        
+        if (!sucesso) {
+            System.out.println("Comando desconhecido. Tente 'ajuda'.");
         }
+        
+        
     }
-
-    private void mostrarAjuda() {
-        System.out.println("Os seus comandos são:");
-        System.out.println("   ir <local>");
-        System.out.println("   olhar");
-        System.out.println("   recolher");
-        System.out.println("   inspecionar <objeto>");
-        System.out.println("   falar <npc>");
-        System.out.println("   recolher <item>");
-        System.out.println("   inventario");
-        System.out.println("   pistas");
-        System.out.println("   sair");
+    
+    
+    public void terminarJogo() {
+        this.jogoEmCurso = false;
     }
+    
     
     public static void main(String[] args) {
         GameLoop jogo = new GameLoop();

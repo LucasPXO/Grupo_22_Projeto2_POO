@@ -17,6 +17,6 @@ public class ComandoOlhar implements AcaoComando {
     
     @Override
     public void executar(String argumento) {
-        System.out.println(jogador.olhar());
+        System.out.println(jogador.getLocalAtual().mostrarInfo());
     }
 }

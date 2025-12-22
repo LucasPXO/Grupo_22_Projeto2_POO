@@ -109,9 +109,10 @@ public class GameLoop {
     public void iniciar() {
         System.out.println("Bem-vindo ao Sherlock Holmes 25/26!");
         System.out.println("Escreva 'ajuda' para ver os comandos disponíveis.");
+        System.out.println(jogador.getLocalAtual().getSaidasDisponiveis());
         System.out.println("---");
 
-        System.out.println(jogador.olhar()); 
+        System.out.println(jogador.getLocalAtual().mostrarInfo()); 
 
         Scanner scanner = new Scanner(System.in);
         
@@ -121,38 +122,21 @@ public class GameLoop {
             
             // O Parser apenas extrai verbo e argumento
             Comando comando = parser.interpretar(inputUtilizador);
-            
-            // ← MUDANÇA: Agora delega ao Vocabulário (SEM SWITCH!)
-            executarComando(comando);
+            vocabulario.executarComando(comando);
+           
+            System.out.println("Saidas disponiveis: ");
+            System.out.println(jogador.getLocalAtual().getSaidasDisponiveis());
+            // No final do método executarComando:
+            if (jogador.temPistaFinal()) { // Cria este método no Jogador
+                System.out.println("PARABÉNS! Descobriu o assassino e resolveu o caso!");
+                this.jogoEmCurso = false; // Termina o loop
+        }
         }
         
         scanner.close();
         System.out.println("Obrigado por jogar. Adeus!");
     }
-
-    
-    private void executarComando(Comando comando) {
-        if (!comando.eValido()) {
-            System.out.println("Não percebi o que quer dizer. Tente 'ajuda'.");
-            return;
-        }
-
-        String verbo = comando.getVerbo();
-        String argumento = comando.getArgumento();
-
-        boolean sucesso = vocabulario.executarComando(verbo, argumento);
-        
-        if (!sucesso) {
-            System.out.println("Comando desconhecido. Tente 'ajuda'.");
-        }
-        
-        // No final do método executarComando:
-        if (jogador.temPistaFinal()) { // Cria este método no Jogador
-            System.out.println("PARABÉNS! Descobriu o assassino e resolveu o caso!");
-            this.jogoEmCurso = false; // Termina o loop
-        }
-    }
-    
+ 
     
     public void terminarJogo() {
         this.jogoEmCurso = false;

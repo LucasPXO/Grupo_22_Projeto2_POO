@@ -23,54 +23,34 @@ public class Vocabulario {
     private void registarComandos(Jogador jogador, GameLoop gameLoop) {
         // Comandos de movimento
         acoes.put("ir", new ComandoIr(jogador));
-        // Sinonimos
-        acoes.put("andar", new ComandoIr(jogador));
-        acoes.put("mover", new ComandoIr(jogador));
-        acoes.put("caminhar", new ComandoIr(jogador));
+        
         
         // Comandos de observação
         acoes.put("olhar", new ComandoOlhar(jogador));
-        // Sinonimos
-        acoes.put("ver", new ComandoOlhar(jogador));
-        acoes.put("observar", new ComandoOlhar(jogador));
+        
         
         acoes.put("inspecionar", new ComandoInspecionar(jogador));
-        // Sinonimos        
-        acoes.put("examinar", new ComandoInspecionar(jogador));
-        acoes.put("investigar", new ComandoInspecionar(jogador));
-        acoes.put("analisar", new ComandoInspecionar(jogador));
+        
         
         // Comandos de interação
         acoes.put("falar", new ComandoFalar(jogador));
-        // Sinonimos
-        acoes.put("conversar", new ComandoFalar(jogador));
-        acoes.put("perguntar", new ComandoFalar(jogador));
+        
         
         acoes.put("recolher", new ComandoRecolher(jogador));
-        // Sinonimos
-        acoes.put("pegar", new ComandoRecolher(jogador));
-        acoes.put("apanhar", new ComandoRecolher(jogador));
-        acoes.put("agarrar", new ComandoRecolher(jogador));
+        
         
         // Comandos de informação
         acoes.put("inventario", new ComandoInventario(jogador));
-        // Sinonimos
-        acoes.put("inv", new ComandoInventario(jogador));
-        acoes.put("i", new ComandoInventario(jogador));
+        
         
         acoes.put("pistas", new ComandoPistas(jogador));
         
         // Comandos de sistema
         acoes.put("ajuda", new ComandoAjuda());
-        // Sinonimos
-        acoes.put("help", new ComandoAjuda());
+        
         
         acoes.put("sair", new ComandoSair(gameLoop));
-        // Sinonimos
-        acoes.put("quit", new ComandoSair(gameLoop));
-        acoes.put("terminar", new ComandoSair(gameLoop));
-        acoes.put("exit", new ComandoSair(gameLoop));
-        
+                
         // ===== ADICIONE NOVOS COMANDOS AQUI =====
         // Exemplo:
         // acoes.put("usar", new ComandoUsar(jogador));
@@ -83,26 +63,17 @@ public class Vocabulario {
      * Executa um comando com base no verbo
      * @return true se o comando foi executado, false se não existe
      */
-    public boolean executarComando(String verbo, String argumento) {
-        if (verbo == null) {
-            return false;
-        }
+    public void executarComando(Comando comando) {
+        String verbo = comando.getVerbo();
+        String argumento = comando.getArgumento();
         
         String verboNormalizado = normalizarVerbo(verbo);
         
-        if (verboNormalizado == null) {
-            return false;
-        }
-        
         AcaoComando acao = acoes.get(verboNormalizado);
-        
-        if (acao == null) {
-            return false;
-        }
         
         // Executa a ação
         acao.executar(argumento);
-        return true;
+      
     }
     
     /**

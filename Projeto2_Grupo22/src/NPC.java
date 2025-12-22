@@ -1,10 +1,9 @@
-public class NPC {
-    private String nome;
+public class NPC extends Entidade {
     private Local local;
     private String fala; // <--- NOVO
 
     public NPC(String nome, Local local) {
-        this.nome = nome;
+        super(nome);
         this.local = local;
         this.fala = "..."; // Fala padrão se não houver ficheiro
         local.adicionarNPC(this);
@@ -20,6 +19,5 @@ public class NPC {
         return this.fala;
     }
     
-    public String getNome() { return this.nome; }
     public Local getLocal() { return this.local; }
 }

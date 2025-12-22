@@ -1,16 +1,13 @@
-public class Item {
+public class Item extends Entidade{
     
     private String nome;
     private String descricao;
 
     public Item(String nome, String descricao) {
-        this.nome = nome;
+        super(nome);
         this.descricao = descricao;
     }
 
-    public String getNome() {
-        return nome;
-    }
 
     public String getDescricao() {
         return descricao;

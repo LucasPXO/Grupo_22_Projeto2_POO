@@ -146,7 +146,11 @@ public class GameLoop {
             System.out.println("Comando desconhecido. Tente 'ajuda'.");
         }
         
-        
+        // No final do método executarComando:
+        if (jogador.temPistaFinal()) { // Cria este método no Jogador
+            System.out.println("PARABÉNS! Descobriu o assassino e resolveu o caso!");
+            this.jogoEmCurso = false; // Termina o loop
+        }
     }
     
     

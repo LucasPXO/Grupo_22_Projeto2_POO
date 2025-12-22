@@ -5,11 +5,13 @@ public class Jogador {
     
     private Local localAtual;
     private List<Item> inventario;
+    private List<Pista> diario = new ArrayList<>();
     // ... inventario, diarioPistas ...
 
     public Jogador(Local localInicial) {
         this.localAtual = localInicial;
         this.inventario = new ArrayList<>();
+        this.diario = new ArrayList<>();
     }
 
     /**
@@ -58,19 +60,24 @@ public class Jogador {
     public void recolher(String nomeItem) {
         if (nomeItem == null || nomeItem.trim().isEmpty()) {
             System.out.println("Recolher o quê?");
-            // Se já tiveres um método para mostrar itens no Local, usa-o. 
-            // Se não, podes simplesmente fazer localAtual.mostrarInfo() para relembrar o jogador.
             System.out.println(localAtual.getLocalItens()); 
             return;
         }
 
-        // 1. Tenta tirar o item do chão (Local)
+        // 1. Tenta tirar o item do chão
         Item item = localAtual.removerItem(nomeItem);
 
-        // 2. Verifica se conseguiu
+        // 2. Verifica se conseguiu apanhar
         if (item != null) {
-            inventario.add(item); // 3. Guarda no inventário
+            inventario.add(item);
             System.out.println("Você apanhou: " + item.getNome());
+
+            // --- NOVO: LÓGICA PARA DETETAR PISTAS AO APANHAR ---
+            if (item.getNome().equalsIgnoreCase("Faca")) {
+                adicionarPista(new Pista("Arma do Crime", "Uma faca ensanguentada encontrada no beco."));
+            }
+            // ---------------------------------------------------
+
         } else {
             System.out.println("Não vejo nenhum " + nomeItem + " aqui.");
         }
@@ -78,9 +85,14 @@ public class Jogador {
     
     // Atualize o método inspecionar para ver itens do inventário também!
     public String inspecionar(String argumento) {
-        // Verifica no inventário
         for(Item i : inventario) {
             if(i.getNome().equalsIgnoreCase(argumento)) {
+                
+                // LÓGICA DE VITÓRIA AQUI:
+                if (i.getNome().equalsIgnoreCase("Diário Perdido")) {
+                    adicionarPista(new Pista("Confissão do Assassino", "O diário detalha como o crime foi cometido."));
+                }
+                
                 return i.getDescricao();
             }
         }
@@ -124,8 +136,43 @@ public class Jogador {
     }
 
     public void listarPistas() {
-        // Implementar a lógica das pistas
-        System.out.println("Ainda não descobriu nenhuma pista.");
+        if (diario.isEmpty()) {
+            System.out.println("Ainda não descobriu nenhuma pista.");
+        } else {
+            System.out.println("=== DIÁRIO DE PISTAS ===");
+            for (Pista p : diario) {
+                // Usa getNome() (da Entidade) e getConteudo() (da Pista)
+                System.out.println("* " + p.getNome() + ": " + p.getConteudo());
+            }
+        }
+    }
+    
+    // Método auxiliar para adicionar pistas sem repetir
+    public void adicionarPista(Pista pista) {
+        for (Pista p : diario) {
+            if (p.getNome().equalsIgnoreCase(pista.getNome())) {
+                return; // Já temos esta pista, não faz nada
+            }
+        }
+        diario.add(pista);
+        System.out.println("\n(i) NOVA PISTA REGISTADA: " + pista.getNome());
+    }
+    
+    /**
+     * Verifica se o jogador reuniu as condições para ganhar o jogo.
+     * Retorna true se tiver a pista final ou pistas suficientes.
+     */
+    public boolean temPistaFinal() {
+        // Lógica Nova: Só ganha se tiver pelo menos 3 pistas no diário
+        // (Ou se tiver uma pista muito específica que só se ganha no fim)
+        
+        int pistasNecessarias = 3; // Defina quantas quiser
+        
+        if (diario.size() >= pistasNecessarias) {
+            return true;
+        }
+        
+        return false;
     }
     
 }

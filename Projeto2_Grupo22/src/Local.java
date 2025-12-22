@@ -3,9 +3,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Local {
+public class Local extends Entidade{
     
-    private String nome;
     private String descricao;
     private Map<String, Local> saidas; 
     private List<Item> itens;        // Lista de Itens no chão
@@ -13,7 +12,7 @@ public class Local {
 
     // Construtor unificado (aceita descrição e nome)
     public Local(String descricao, String nome) {
-        this.nome = nome;
+        super(nome);
         this.descricao = descricao;
         this.saidas = new HashMap<>();
         this.itens = new ArrayList<>();       // Inicializa lista de itens
@@ -65,10 +64,6 @@ public class Local {
     }
 
     // --- INFORMAÇÃO E GETTERS ---
-
-    public String getNome() {
-        return nome;
-    }
 
     public String getDescricao() {
         return descricao;

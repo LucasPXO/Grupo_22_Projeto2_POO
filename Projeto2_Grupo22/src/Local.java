@@ -84,23 +84,35 @@ public class Local {
         StringBuilder info = new StringBuilder(descricao);
         
         // 1. Listar Itens
+        info.append(getLocalItens());
+        
+        // 2. Listar NPCs
+        info.append(getLocalNPCs());
+        
+        return info.toString();
+    }
+   
+    public String getLocalItens(){
+        StringBuilder info = new StringBuilder();
         if (!itens.isEmpty()) {
             info.append("\n\nVocê vê os seguintes itens:");
             for (Item i : itens) {
                 info.append("\n- ").append(i.getNome());
             }
         }
-        
-        // 2. Listar NPCs
+        return info.toString();
+    }
+    
+    public String getLocalNPCs(){
+        StringBuilder info = new StringBuilder();
         if (!npcsNoLocal.isEmpty()) {
             info.append("\n\nPersonagens presentes:");
             for (NPC npc : npcsNoLocal) {
                 info.append("\n- ").append(npc.getNome());
             }
         } else {
-            // Opcional: info.append("\nNinguém por aqui.");
+            info.append("\nNinguém por aqui.");
         }
-        
         return info.toString();
     }
 }

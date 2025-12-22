@@ -10,17 +10,10 @@
  */
 public class ComandoRecolher implements AcaoComando {
     private Jogador jogador;
-    
-    public ComandoRecolher(Jogador jogador) {
-        this.jogador = jogador;
-    }
-    
+    public ComandoRecolher(Jogador jogador) { this.jogador = jogador; }
+
     @Override
     public void executar(String argumento) {
-        if (argumento == null || argumento.trim().isEmpty()) {
-            System.out.println("Recolher o quê? Especifique um item.");
-            return;
-        }
         jogador.recolher(argumento);
     }
 }

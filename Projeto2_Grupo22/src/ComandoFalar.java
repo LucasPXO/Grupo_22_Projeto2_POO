@@ -17,10 +17,6 @@ public class ComandoFalar implements AcaoComando {
     
     @Override
     public void executar(String argumento) {
-        if (argumento == null || argumento.trim().isEmpty()) {
-            System.out.println("Falar com quem? Especifique um personagem.");
-            return;
-        }
         System.out.println(jogador.falar(argumento));
     }
 }

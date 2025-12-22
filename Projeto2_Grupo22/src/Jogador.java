@@ -56,8 +56,11 @@ public class Jogador {
      * Tenta apanhar um item do local atual.
      */
     public void recolher(String nomeItem) {
-        if (nomeItem == null) {
+        if (nomeItem == null || nomeItem.trim().isEmpty()) {
             System.out.println("Recolher o quê?");
+            // Se já tiveres um método para mostrar itens no Local, usa-o. 
+            // Se não, podes simplesmente fazer localAtual.mostrarInfo() para relembrar o jogador.
+            System.out.println(localAtual.getLocalItens()); 
             return;
         }
 
@@ -87,7 +90,8 @@ public class Jogador {
     public String falar(String nomeNPC) {
         // 1. Verificar se o jogador escreveu um nome
         if (nomeNPC == null || nomeNPC.trim().isEmpty()) {
-            return "Falar com quem?";
+            return "Falar com quem?"
+                    + localAtual.getLocalNPCs() ;
         }
 
         // 2. Obter a lista de NPCs no local atual

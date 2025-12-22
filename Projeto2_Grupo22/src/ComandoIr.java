@@ -10,17 +10,11 @@
  */
 public class ComandoIr implements AcaoComando {
     private Jogador jogador;
-    
-    public ComandoIr(Jogador jogador) {
-        this.jogador = jogador;
-    }
-    
+    public ComandoIr(Jogador jogador) { this.jogador = jogador; }
+
     @Override
     public void executar(String argumento) {
-        if (argumento == null || argumento.trim().isEmpty()) {
-            System.out.println("Ir para onde? Especifique um local.");
-            return;
-        }
-        jogador.mover(argumento);
+        // Sem ifs, sem complicações. O Jogador que se desenrasque.
+        jogador.mover(argumento); 
     }
 }

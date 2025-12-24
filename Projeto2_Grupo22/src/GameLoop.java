@@ -15,7 +15,7 @@ public class GameLoop {
         criarMundo();
         
         CarregadorDialogos carregador = new CarregadorDialogos();
-        carregador.carregar("dialogos.rtf", todosNpcs);
+        carregador.carregar("dialogos.txt", todosNpcs);
         
         // ← NOVO: Inicializa o Vocabulário DEPOIS de criar o jogador
         this.vocabulario = new Vocabulario(jogador, this);

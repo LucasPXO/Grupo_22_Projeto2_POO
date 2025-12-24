@@ -127,7 +127,7 @@ public class Jogador {
         // Lógica Nova: Só ganha se tiver pelo menos 3 pistas no diário
         // (Ou se tiver uma pista muito específica que só se ganha no fim)
         
-        int pistasNecessarias = 1; // Defina quantas quiser
+        int pistasNecessarias = 3; // Defina quantas quiser
         
         if (diario.size() >= pistasNecessarias) {
             return true;

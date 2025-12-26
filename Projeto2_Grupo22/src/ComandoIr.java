@@ -1,48 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// Em src/ComandoIr.java
 
-
-/**
- *
- * @author gugar
- */
 public class ComandoIr implements AcaoComando {
     private Jogador jogador;
-    
-    
+
     public ComandoIr(Jogador jogador) {
         this.jogador = jogador;
     }
 
     @Override
-    public void executar(String argumento) {
-        Local localAtual=jogador.getLocalAtual();
-        // Se a direção for nula ou vazia (apenas espaços)
-        if (argumento == null || argumento.trim().isEmpty()) {
+    public void executar(String direcao) {
+        if (direcao == null || direcao.trim().isEmpty()) {
             System.out.println("Ir para onde?");
-            // AQUI ESTÁ A MUDANÇA: Mostra as opções
-            System.out.println("Saídas possíveis: " + localAtual.getSaidasDisponiveis());
             return;
         }
 
-        // 1. Pede ao local atual se existe uma saída com esse nome
-        Local proximoLocal = localAtual.getSaida(argumento);
+        // 1. Pedir o local atual ao jogador
+        Local atual = jogador.getLocalAtual();
+        
+        // 2. Verificar se existe saída
+        Local destino = atual.getSaida(direcao);
 
-        // 2. Verifica a resposta
-        if (proximoLocal == null) {
-            System.out.println("Não pode ir por aí.");
-            // Opcional: Mostrar as saídas também quando o jogador erra a direção
-            System.out.println("Tente: " + localAtual.getSaidasDisponiveis());
-        } else {
-            // 3. Atualiza o local do jogador
-            jogador.localAtual = proximoLocal;
+        if (destino != null) {
+            // 3. Atualizar o estado do jogador
+            jogador.setLocalAtual(destino);
             
-            // 4. Mostra a descrição do novo local (importante!)
-            System.out.println("\n=== " + proximoLocal.getNome() + " ===");
-            System.out.println(proximoLocal.mostrarInfo()); 
-
+            // 4. Feedback ao utilizador (Interface)
+            System.out.println("Dirigiu-se para: " + direcao);
+            System.out.println(jogador.getLocalAtual().mostrarInfo());
+        } else {
+            System.out.println("Não pode ir para '" + direcao + "'.");
         }
     }
 }

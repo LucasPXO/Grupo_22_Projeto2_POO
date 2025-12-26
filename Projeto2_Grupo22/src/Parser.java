@@ -1,12 +1,16 @@
 public class Parser {
     
     public Comando interpretar(String inputLinha) {
-        String linha = inputLinha.trim().toLowerCase(); // Normalizar
-        String[] palavras = linha.split(" ", 2); // Divide no primeiro espaço
-
-        if (palavras.length == 0) {
-            return new Comando(null, null); // Input vazio
+        // 1. Proteção contra Nulo ou Vazio (Segurança extra)
+        if (inputLinha == null || inputLinha.trim().isEmpty()) {
+            return new Comando(null, null);
         }
+
+        String linha = inputLinha.trim().toLowerCase(); // Normalizar
+        
+        // 2. O segredo: Divide apenas no primeiro espaço
+        // Ex: "acusar o mordomo" -> ["acusar", "o mordomo"]
+        String[] palavras = linha.split(" ", 2); 
 
         String verbo = palavras[0];
         String argumento = null;
@@ -14,9 +18,6 @@ public class Parser {
         if (palavras.length > 1) {
             argumento = palavras[1];
         }
-
-        // Aqui pode verificar se o "verbo" é um comando conhecido
-        // (ex: "ir", "olhar", "falar")
         
         return new Comando(verbo, argumento);
     }

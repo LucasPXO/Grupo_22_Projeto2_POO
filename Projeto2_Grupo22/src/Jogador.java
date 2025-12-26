@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Jogador {
     
-    protected Local localAtual;
+    private Local localAtual;
     private List<Item> inventario;
     private List<Pista> diario = new ArrayList<>();
     // ... inventario, diarioPistas ...
@@ -14,31 +14,27 @@ public class Jogador {
         this.diario = new ArrayList<>();
     }
     
+    public void setLocalAtual(Local novoLocal) {
+        this.localAtual = novoLocal;
+    }
+    
     public Local getLocalAtual(){return this.localAtual;}
     /**
      * Tenta apanhar um item do local atual.
      */
     public void recolher(String nomeItem) {
-        if (nomeItem == null || nomeItem.trim().isEmpty()) {
-            System.out.println("Recolher o quê?");
-            System.out.println(localAtual.getLocalItens()); 
-            return;
-        }
-
-        // 1. Tenta tirar o item do chão
+        // ... validações iniciais ...
         Item item = localAtual.removerItem(nomeItem);
 
-        // 2. Verifica se conseguiu apanhar
         if (item != null) {
             inventario.add(item);
             System.out.println("Você apanhou: " + item.getNome());
 
-            // --- NOVO: LÓGICA PARA DETETAR PISTAS AO APANHAR ---
-            if (item.getNome().equalsIgnoreCase("Faca")) {
-                adicionarPista(new Pista("Arma do Crime", "Uma faca ensanguentada encontrada no beco."));
+            // --- LÓGICA SOLID PERFEITA ---
+            // O jogador não sabe QUE item é, só vê se tem pista anexada
+            if (item.getPista() != null) {
+                adicionarPista(item.getPista());
             }
-            // ---------------------------------------------------
-
         } else {
             System.out.println("Não vejo nenhum " + nomeItem + " aqui.");
         }
@@ -49,9 +45,9 @@ public class Jogador {
         for(Item i : inventario) {
             if(i.getNome().equalsIgnoreCase(argumento)) {
                 
-                // LÓGICA DE VITÓRIA AQUI:
-                if (i.getNome().equalsIgnoreCase("Diário Perdido")) {
-                    adicionarPista(new Pista("Confissão do Assassino", "O diário detalha como o crime foi cometido."));
+                // Lógica Genérica: Se o item tiver pista, regista-a
+                if (i.getPista() != null) {
+                    adicionarPista(i.getPista());
                 }
                 
                 return i.getDescricao();
@@ -61,24 +57,21 @@ public class Jogador {
     }
 
     public String falar(String nomeNPC) {
-        // 1. Verificar se o jogador escreveu um nome
         if (nomeNPC == null || nomeNPC.trim().isEmpty()) {
-            return "Falar com quem?"
-                    + localAtual.getLocalNPCs() ;
+            return "Falar com quem? Pessoas aqui: " + localAtual.getLocalNPCs();
         }
 
-        // 2. Obter a lista de NPCs no local atual
-        List<NPC> npcsNoLocal = localAtual.getNpcsNoLocal();
+        // --- CORREÇÃO DE ENCAPSULAMENTO ---
+        // Em vez de pedir a lista toda, pedimos só o NPC específico
+        NPC npc = localAtual.getNPC(nomeNPC); 
 
-        // 3. Procurar o NPC pelo nome
-        for (NPC npc : npcsNoLocal) {
-            if (npc.getNome().equalsIgnoreCase(nomeNPC)) {
-                // 4. Se encontrou, retorna a fala dele
-                return npc.getNome() + " diz: \"" + npc.getFala() + "\"";
+        if (npc != null) {
+            // Lógica SOLID (já está correta no teu código)
+            if (npc.getPista() != null) {
+                adicionarPista(npc.getPista());
             }
+            return npc.getNome() + " diz: \"" + npc.getFala() + "\"";
         }
-
-        // 5. Se não encontrou ninguém com esse nome
         return "Não vês '" + nomeNPC + "' aqui.";
     }
 
@@ -120,20 +113,11 @@ public class Jogador {
     }
     
     /**
-     * Verifica se o jogador reuniu as condições para ganhar o jogo.
-     * Retorna true se tiver a pista final ou pistas suficientes.
+     * Devolve o número total de pistas recolhidas.
+     * @return 
      */
-    public boolean temPistaFinal() {
-        // Lógica Nova: Só ganha se tiver pelo menos 3 pistas no diário
-        // (Ou se tiver uma pista muito específica que só se ganha no fim)
-        
-        int pistasNecessarias = 3; // Defina quantas quiser
-        
-        if (diario.size() >= pistasNecessarias) {
-            return true;
-        }
-        
-        return false;
+    public int getNumeroPistas() {
+        return diario.size();
     }
     
 }

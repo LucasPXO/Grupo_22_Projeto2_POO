@@ -59,9 +59,16 @@ public class Local extends Entidade{
         this.npcsNoLocal.remove(npc);
     }
     
-    public List<NPC> getNpcsNoLocal() {
-        return npcsNoLocal;
+    // Método novo para proteger a lista
+    public NPC getNPC(String nomeProcurado) {
+        for (NPC npc : npcsNoLocal) {
+            if (npc.getNome().equalsIgnoreCase(nomeProcurado)) {
+                return npc;
+            }
+        }
+        return null;
     }
+    
 
     // --- INFORMAÇÃO E GETTERS ---
 
@@ -69,9 +76,6 @@ public class Local extends Entidade{
         return descricao;
     }
     
-    public List<Item> getItens(Local local){
-        return local.itens;
-    }
     /**
      * Método principal para mostrar o que há no local (Descrição + Itens + NPCs)
      */

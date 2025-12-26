@@ -1,4 +1,9 @@
-Cidadao:Ola, bom dia. Vi alguem suspeito a correr para o beco.\
-Cao:O cao ladra furiosamente para si! Au au!\
-Inspetor Lestrade:Detetive, finalmente! O corpo esta no beco escuro. Preciso que encontre a arma do crime.\
-Mordomo:O patrao nao esta em casa. E por favor, nao toque em nada.
+Inspetor Lestrade:Detetive, a vítima é o Sr. Barnabas, um agiota local. Foi esfaqueado no Beco. Encontre a arma e descubra quem lhe devia dinheiro.
+Sr.Manuel:Eu estava na loja. Mas vi alguém a correr para a Barbearia com as mãos sujas de sangue!
+Lucas:Eu? Eu estava aqui a afiar as minhas... navalhas. O Barnabas era um homem cruel, mas eu não o matei. E aquela carta no beco não prova nada!
+Mordomo:O Sr. Barnabas saiu para cobrar uma dívida antiga. Ele parecia preocupado com o Barbeiro.
+Cidadao:Ouvi gritos vindos do Beco, parecia uma discussão sobre dinheiro.
+Cao:Grrr... (O cão cheira o seu sapato e gane baixinho)
+Sra.Irlinda:O Lucas esteve aqui a beber para ganhar coragem antes de sair... parecia nervoso.
+Sem Abrigo:Por uma moeda digo-lhe o que vi... (pausa) Vi o Barbeiro a atirar algo para o chão e a fugir!
+Joel:Toda a gente devia dinheiro ao Barnabas. Ninguém vai chorar a morte dele.

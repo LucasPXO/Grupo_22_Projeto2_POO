@@ -95,12 +95,25 @@ public class GameLoop {
         
         mansao.adicionarSaida("cena do crime", cenaDoCrime);
         
-        // Adicionar Itens
-        Item lupa = new Item("Lupa", "Uma lupa antiga, boa para ver detalhes.");
-        Item faca = new Item("Faca", "Uma faca afiada encontrada no chão.");
+        Item lupa = new Item("Lupa", "Uma lupa antiga.");
+        Item faca = new Item("Faca", "Uma faca de cozinha com sangue seco.");
+        Item carta = new Item("Carta", "Uma nota de dívida assinada pelo Lucas (o Barbeiro). Valor: 5000 libras."); // <--- NOVO ITEM
 
         ruaBaker.adicionarItem(lupa);
         cenaDoCrime.adicionarItem(faca);
+        cenaDoCrime.adicionarItem(carta);
+        
+        // 1. Configurar Pista na Faca
+        faca.setPista(new Pista("Arma do Crime", "Faca encontrada junto ao corpo."));
+
+        // 2. Configurar Pista na Carta
+        carta.setPista(new Pista("Dívida do Barbeiro", "Prova que o Lucas devia dinheiro."));
+
+        // 3. Configurar Pista no Sr. Manuel
+        srManuel.setPista(new Pista("Vulto na Loja", "Manuel viu alguém fugir para a Barbearia."));
+
+        // 4. Configurar Pista no Sem Abrigo
+        semAbrigo.setPista(new Pista("Testemunho do Sem Abrigo", "Viu o Lucas no beco."));
 
         // Criar o jogador
         this.jogador = new Jogador(ruaBaker);
@@ -126,11 +139,7 @@ public class GameLoop {
            
             System.out.println("Saidas disponiveis: ");
             System.out.println(jogador.getLocalAtual().getSaidasDisponiveis());
-            // No final do método executarComando:
-            if (jogador.temPistaFinal()) { // Cria este método no Jogador
-                System.out.println("PARABÉNS! Descobriu o assassino e resolveu o caso!");
-                this.jogoEmCurso = false; // Termina o loop
-        }
+           
         }
         
         scanner.close();

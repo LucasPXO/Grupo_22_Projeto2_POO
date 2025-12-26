@@ -1,12 +1,22 @@
 public class NPC extends Entidade {
     private Local local;
-    private String fala; // <--- NOVO
+    private String fala;
+    private Pista pistaSecreta; // <--- NOVO
 
     public NPC(String nome, Local local) {
         super(nome);
         this.local = local;
-        this.fala = "..."; // Fala padrão se não houver ficheiro
+        this.fala = "...";
         local.adicionarNPC(this);
+        this.pistaSecreta = null;
+    }
+
+    public void setPista(Pista pista) {
+        this.pistaSecreta = pista;
+    }
+
+    public Pista getPista() {
+        return pistaSecreta;
     }
     
     // Define a fala (usado pelo carregador)

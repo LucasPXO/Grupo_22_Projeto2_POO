@@ -22,7 +22,6 @@ public class Vocabulario {
      */
     private void registarComandos(Jogador jogador, GameLoop gameLoop) {
         // Comandos de movimento
-        // Comandos de movimento
         acoes.put("ir", new ComandoIr(jogador));
         // Sinonimos
         acoes.put("andar", new ComandoIr(jogador));
@@ -60,6 +59,8 @@ public class Vocabulario {
         acoes.put("i", new ComandoInventario(jogador));
         
         acoes.put("pistas", new ComandoPistas(jogador));
+        
+        acoes.put("acusar", new ComandoAcusar(gameLoop, jogador));
         
         // Comandos de sistema
         acoes.put("ajuda", new ComandoAjuda());

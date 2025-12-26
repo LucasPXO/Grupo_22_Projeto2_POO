@@ -31,6 +31,8 @@ public class ComandoAjuda implements AcaoComando {
         System.out.println("                         Sinónimos: conversar, perguntar");
         System.out.println("   recolher <item>     - Recolhe um item do local");
         System.out.println("                         Sinónimos: pegar, apanhar, agarrar");
+        System.out.println("   acusar <npc>        - Tenta resolver o caso. CUIDADO: Se errar, perde!");
+
         System.out.println();
         System.out.println("INFORMAÇÃO:");
         System.out.println("   inventario          - Lista os itens no seu inventário");

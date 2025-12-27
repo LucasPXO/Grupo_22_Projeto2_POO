@@ -19,26 +19,6 @@ public class Jogador {
     }
     
     public Local getLocalAtual(){return this.localAtual;}
-    /**
-     * Tenta apanhar um item do local atual.
-     */
-    public void recolher(String nomeItem) {
-        // ... validações iniciais ...
-        Item item = localAtual.removerItem(nomeItem);
-
-        if (item != null) {
-            inventario.add(item);
-            System.out.println("Você apanhou: " + item.getNome());
-
-            // --- LÓGICA SOLID PERFEITA ---
-            // O jogador não sabe QUE item é, só vê se tem pista anexada
-            if (item.getPista() != null) {
-                adicionarPista(item.getPista());
-            }
-        } else {
-            System.out.println("Não vejo nenhum " + nomeItem + " aqui.");
-        }
-    }
     
     // Atualize o método inspecionar para ver itens do inventário também!
     public String inspecionar(String argumento) {
@@ -74,6 +54,8 @@ public class Jogador {
         }
         return "Não vês '" + nomeNPC + "' aqui.";
     }
+    
+    public List<Item> getInventario(){return this.inventario;}
 
     /**
      * Mostra o que o jogador carrega.

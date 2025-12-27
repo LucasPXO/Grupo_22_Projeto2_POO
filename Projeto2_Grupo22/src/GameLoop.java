@@ -96,7 +96,7 @@ public class GameLoop {
         mansao.adicionarSaida("beco", beco);
         
         Item lupa = new Item("Lupa", "Uma lupa antiga.");
-        Item faca = new Item("Faca", "Uma faca de cozinha com sangue seco.");
+        Item faca = new Item("Faca", "Uma faca de cozinha com sangue seco. É mesmo parecida às que a Sra.Irlinda usa no seu bar.");
         Item carta = new Item("Carta", "->Uma nota de dívida assinada pelo Lucas (o Barbeiro). Valor: 5000 libras. \n"
                 + "->Junto da mesma, tem um texto do Barnabas que diz o seguinte:\n"
                 + "->'Encontra-te comigo amanhã pelas 22h no beco para me pagares a dívida, sem falta!! Ou haverão consequências...' "); // <--- NOVO ITEM
@@ -138,7 +138,6 @@ public class GameLoop {
             Comando comando = parser.interpretar(inputUtilizador);
             vocabulario.executarComando(comando);
            
-            System.out.println("Saidas disponiveis: ");
             jogador.getLocalAtual().getSaidasDisponiveis();
            
         }

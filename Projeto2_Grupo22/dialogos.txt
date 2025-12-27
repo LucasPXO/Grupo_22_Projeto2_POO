@@ -1,9 +1,9 @@
-Inspetor Lestrade:Detetive, a vítima é o Sr. Barnabas, um agiota local. Foi esfaqueado no Beco. Encontre a arma e descubra quem lhe devia dinheiro.
-Sr.Manuel:Eu estava na loja. Mas vi alguém a correr para a Barbearia com as mãos sujas de sangue!
+Inspetor Lestrade:Detetive, a vítima é o Sr. Barnabas, um agiota local. Foi esfaqueado no Beco. Encontre a arma e descubra quem lhe devia dinheiro. Comece por examinar a cena do crime, poderá encontrar algo lá.
+Sr.Manuel:Eu estava na loja. Mas vi alguém a correr na direção da Barbearia! Talvez alguém estava mesmo com pressa para cortar o cabelo...
 Lucas:Eu? Eu estava aqui a afiar as minhas... navalhas. O Barnabas era um homem cruel, mas eu não o matei. E aquela carta no beco não prova nada!
 Mordomo:O Sr. Barnabas saiu para cobrar uma dívida antiga. Ele parecia preocupado com o Barbeiro.
 Cidadao:Ouvi gritos vindos do Beco, parecia uma discussão sobre dinheiro.
 Cao:Grrr... (O cão cheira o seu sapato e gane baixinho)
-Sra.Irlinda:O Lucas esteve aqui a beber para ganhar coragem antes de sair... parecia nervoso.
+Sra.Irlinda:O Lucas esteve aqui a beber para ganhar coragem antes de sair... parecia nervoso. Já agora, falta-nos uma faca na cozinha, por acaso não a viu?
 Sem Abrigo:Por uma moeda digo-lhe o que vi... (pausa) Vi o Barbeiro a atirar algo para o chão e a fugir!
 Joel:Toda a gente devia dinheiro ao Barnabas. Ninguém vai chorar a morte dele.

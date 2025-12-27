@@ -14,6 +14,18 @@ public class ComandoRecolher implements AcaoComando {
 
     @Override
     public void executar(String argumento) {
-        jogador.recolher(argumento);
+        // ... validações iniciais ...
+        Item item = jogador.getLocalAtual().removerItem(argumento);
+
+        if (item != null) {
+            jogador.getInventario().add(item);
+            System.out.println("Você apanhou: " + item.getNome());
+            
+            if (item.getPista() != null) {
+                jogador.adicionarPista(item.getPista());
+            }
+        } else {
+            System.out.println("Não vejo nenhum " + argumento + " aqui.");
+        }
     }
 }

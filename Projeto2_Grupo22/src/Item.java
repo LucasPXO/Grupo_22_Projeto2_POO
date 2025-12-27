@@ -1,6 +1,6 @@
 public class Item extends Entidade {
     private String descricao;
-    private Pista pistaEscondida; // <--- NOVO
+    private Pista pistaEscondida; 
 
     public Item(String nome, String descricao) {
         super(nome);

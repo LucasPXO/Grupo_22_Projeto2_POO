@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Local extends Entidade{
     
@@ -29,8 +30,12 @@ public class Local extends Entidade{
         return this.saidas.get(direcao.toLowerCase());
     }
 
-    public String getSaidasDisponiveis() {
-        return saidas.keySet().toString();
+    public void getSaidasDisponiveis() {
+        Set<String> chaves = saidas.keySet();
+        String formatada = String.join(", ", chaves);
+
+        System.out.println("Saídas disponíveis: " + formatada);
+
     }
 
     // --- GESTÃO DE ITENS ---

@@ -6,7 +6,7 @@ public class GameLoop {
 
     private Jogador jogador;
     private Parser parser;
-    private Vocabulario vocabulario;  // ← NOVO
+    private Vocabulario vocabulario;  
     private boolean jogoEmCurso;
     private List<NPC> todosNpcs;
 
@@ -26,7 +26,7 @@ public class GameLoop {
     private void criarMundo() {
         // Criar os locais
         Local ruaBaker = new Local("Está na 221B Baker Street, o seu escritório.", "Rua Baker");
-        Local cenaDoCrime = new Local("Está numa viela escura. Há uma silhueta no chão.", "Beco");
+        Local beco = new Local("Está numa viela escura. Há uma silhueta no chão.", "Beco");
         Local delegacia = new Local("Está na Scotland Yard, o inspetor Lestrade parece impaciente.", "Delegacia");
         Local mansao = new Local("Está nos portões de uma mansão imponente.", "Mansão");
         Local loja = new Local("Acaba de entrar na loja do Sr.Manuel, que se encontra ao balcão a limpar alguns artigos.", "Loja");
@@ -58,15 +58,15 @@ public class GameLoop {
         todosNpcs.add(joel);
         
         // Ligar as saídas
-        ruaBaker.adicionarSaida("cena do crime", cenaDoCrime);
+        ruaBaker.adicionarSaida("beco", beco);
         ruaBaker.adicionarSaida("delegacia", delegacia);
         ruaBaker.adicionarSaida("loja", loja);
         ruaBaker.adicionarSaida("bar", bar);
         
-        cenaDoCrime.adicionarSaida("baker street", ruaBaker);
-        cenaDoCrime.adicionarSaida("floresta", floresta);
-        cenaDoCrime.adicionarSaida("bar", bar);
-        cenaDoCrime.adicionarSaida("mansao", mansao);
+        beco.adicionarSaida("baker street", ruaBaker);
+        beco.adicionarSaida("floresta", floresta);
+        beco.adicionarSaida("bar", bar);
+        beco.adicionarSaida("mansao", mansao);
         
         delegacia.adicionarSaida("baker street", ruaBaker);
         delegacia.adicionarSaida("casa", casa);
@@ -88,20 +88,22 @@ public class GameLoop {
         escadaria.adicionarSaida("floresta", floresta);
         
         floresta.adicionarSaida("escadaria",escadaria);
-        floresta.adicionarSaida("cena do crime", cenaDoCrime);
+        floresta.adicionarSaida("beco", beco);
         
         bar.adicionarSaida("baker street", ruaBaker);
-        bar.adicionarSaida("cena do crime", cenaDoCrime);
+        bar.adicionarSaida("beco", beco);
         
-        mansao.adicionarSaida("cena do crime", cenaDoCrime);
+        mansao.adicionarSaida("beco", beco);
         
         Item lupa = new Item("Lupa", "Uma lupa antiga.");
         Item faca = new Item("Faca", "Uma faca de cozinha com sangue seco.");
-        Item carta = new Item("Carta", "Uma nota de dívida assinada pelo Lucas (o Barbeiro). Valor: 5000 libras."); // <--- NOVO ITEM
+        Item carta = new Item("Carta", "->Uma nota de dívida assinada pelo Lucas (o Barbeiro). Valor: 5000 libras. \n"
+                + "->Junto da mesma, tem um texto do Barnabas que diz o seguinte:\n"
+                + "->'Encontra-te comigo amanhã pelas 22h no beco para me pagares a dívida, sem falta!! Ou haverão consequências...' "); // <--- NOVO ITEM
 
         ruaBaker.adicionarItem(lupa);
-        cenaDoCrime.adicionarItem(faca);
-        cenaDoCrime.adicionarItem(carta);
+        beco.adicionarItem(faca);
+        beco.adicionarItem(carta);
         
         // 1. Configurar Pista na Faca
         faca.setPista(new Pista("Arma do Crime", "Faca encontrada junto ao corpo."));
@@ -122,7 +124,6 @@ public class GameLoop {
     public void iniciar() {
         System.out.println("Bem-vindo ao Sherlock Holmes 25/26!");
         System.out.println("Escreva 'ajuda' para ver os comandos disponíveis.");
-        System.out.println(jogador.getLocalAtual().getSaidasDisponiveis());
         System.out.println("---");
 
         System.out.println(jogador.getLocalAtual().mostrarInfo()); 
@@ -138,7 +139,7 @@ public class GameLoop {
             vocabulario.executarComando(comando);
            
             System.out.println("Saidas disponiveis: ");
-            System.out.println(jogador.getLocalAtual().getSaidasDisponiveis());
+            jogador.getLocalAtual().getSaidasDisponiveis();
            
         }
         

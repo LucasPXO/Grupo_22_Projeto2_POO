@@ -27,7 +27,7 @@ public class CarregadorDialogos {
                     }
                 }
             }
-            System.out.println("Diálogos carregados com sucesso.");
+            //System.out.println("Diálogos carregados com sucesso.");
             
         } catch (IOException e) {
             System.out.println("Erro: Não consegui ler o ficheiro de diálogos.");

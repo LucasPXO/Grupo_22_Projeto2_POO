@@ -30,7 +30,7 @@ public class Vocabulario {
         acoes.put("inspecionar", new ComandoInspecionar(jogador));
         
         // Comandos de interação
-        acoes.put("falar", new ComandoFalar(jogador));
+        acoes.put("falar", new ComandoFalar(jogador, gameLoop.getScanner()));
         
         acoes.put("recolher", new ComandoRecolher(jogador));
         

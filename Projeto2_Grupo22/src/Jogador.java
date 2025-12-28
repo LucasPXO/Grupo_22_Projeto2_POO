@@ -1,105 +1,69 @@
-import java.util.ArrayList; // <--- Importante
+import java.util.ArrayList; 
 import java.util.List;
 
+/**
+ * Representa o protagonista do jogo.
+ * Mantém o rastro da localização atual, itens coletados e o progresso da investigação (diário).
+ */
 public class Jogador {
     
+    // --- Atributos ---
     private Local localAtual;
     private List<Item> inventario;
-    private List<Pista> diario = new ArrayList<>();
-    // ... inventario, diarioPistas ...
+    private List<Pista> diario;
 
+    /**
+     * Construtor do Jogador.
+     * @param localInicial O ponto de partida do jogador no mapa.
+     */
     public Jogador(Local localInicial) {
         this.localAtual = localInicial;
         this.inventario = new ArrayList<>();
         this.diario = new ArrayList<>();
     }
     
+    // --- Métodos de Navegação ---
+
     public void setLocalAtual(Local novoLocal) {
         this.localAtual = novoLocal;
     }
     
-    public Local getLocalAtual(){return this.localAtual;}
-    
-    // Atualize o método inspecionar para ver itens do inventário também!
-    public String inspecionar(String argumento) {
-        for(Item i : inventario) {
-            if(i.getNome().equalsIgnoreCase(argumento)) {
-                
-                // Lógica Genérica: Se o item tiver pista, regista-a
-                if (i.getPista() != null) {
-                    adicionarPista(i.getPista());
-                }
-                
-                return i.getDescricao();
-            }
-        }
-        return "Não tem ou não vê isso aqui.";
+    public Local getLocalAtual() {
+        return this.localAtual;
     }
 
-    public String falar(String nomeNPC) {
-        if (nomeNPC == null || nomeNPC.trim().isEmpty()) {
-            return "Falar com quem? Pessoas aqui: " + localAtual.getLocalNPCs();
-        }
-
-        // --- CORREÇÃO DE ENCAPSULAMENTO ---
-        // Em vez de pedir a lista toda, pedimos só o NPC específico
-        NPC npc = localAtual.getNPC(nomeNPC); 
-
-        if (npc != null) {
-            // Lógica SOLID (já está correta no teu código)
-            if (npc.getPista() != null) {
-                adicionarPista(npc.getPista());
-            }
-            return npc.getNome() + " diz: \"" + npc.getFala() + "\"";
-        }
-        return "Não vês '" + nomeNPC + "' aqui.";
+    // --- Gestão de Inventário e Investigação ---
+  
+    public List<Item> getInventario() {
+        return this.inventario;
     }
     
-    public List<Item> getInventario(){return this.inventario;}
+    public List<Pista> getDiario() {
+        return this.diario;
+    }
 
     /**
-     * Mostra o que o jogador carrega.
+     * Adiciona uma nova pista ao diário, garantindo que não haja duplicatas.
+     * @param novaPista A pista a ser registada.
      */
-    public void listarInventario() {
-        if (inventario.isEmpty()) {
-            System.out.println("O seu inventário está vazio.");
-        } else {
-            System.out.println("Inventário:");
-            for (Item i : inventario) {
-                System.out.println("- " + i.getNome());
-            }
-        }
-    }
+    public void adicionarPista(Pista novaPista) {
+        if (novaPista == null) return;
 
-    public void listarPistas() {
-        if (diario.isEmpty()) {
-            System.out.println("Ainda não descobriu nenhuma pista.");
-        } else {
-            System.out.println("=== DIÁRIO DE PISTAS ===");
-            for (Pista p : diario) {
-                // Usa getNome() (da Entidade) e getConteudo() (da Pista)
-                System.out.println("* " + p.getNome() + ": " + p.getConteudo());
-            }
+        // Verifica se a pista já existe no diário pelo nome (evita duplicados)
+        boolean jaExiste = diario.stream()
+                .anyMatch(p -> p.getNome().equalsIgnoreCase(novaPista.getNome()));
+
+        if (!jaExiste) {
+            diario.add(novaPista);
+            System.out.println("\n(i) NOVA PISTA REGISTADA: " + novaPista.getNome());
         }
-    }
-    
-    // Método auxiliar para adicionar pistas sem repetir
-    public void adicionarPista(Pista pista) {
-        for (Pista p : diario) {
-            if (p.getNome().equalsIgnoreCase(pista.getNome())) {
-                return; // Já temos esta pista, não faz nada
-            }
-        }
-        diario.add(pista);
-        System.out.println("\n(i) NOVA PISTA REGISTADA: " + pista.getNome());
     }
     
     /**
-     * Devolve o número total de pistas recolhidas.
-     * @return 
+     * Devolve o número total de pistas recolhidas até ao momento.
+     * @return Total de objetos Pista no diário.
      */
     public int getNumeroPistas() {
         return diario.size();
     }
-    
 }

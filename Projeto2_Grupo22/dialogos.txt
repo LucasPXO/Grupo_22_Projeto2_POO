@@ -1,9 +1,101 @@
-Inspetor Lestrade:Detetive, a vítima é o Sr. Barnabas, um agiota local. Foi esfaqueado no Beco. Encontre a arma e descubra quem lhe devia dinheiro. Comece por examinar a cena do crime, poderá encontrar algo lá.
-Sr.Manuel:Eu estava na loja. Mas vi alguém a correr na direção da Barbearia! Talvez alguém estava mesmo com pressa para cortar o cabelo...
-Lucas:Eu? Eu estava aqui a afiar as minhas... navalhas. O Barnabas era um homem cruel, mas eu não o matei. E aquela carta no beco não prova nada!
-Mordomo:O Sr. Barnabas saiu para cobrar uma dívida antiga. Ele parecia preocupado com o Barbeiro.
-Cidadao:Ouvi gritos vindos do Beco, parecia uma discussão sobre dinheiro.
-Cao:Grrr... (O cão cheira o seu sapato e gane baixinho)
-Sra.Irlinda:O Lucas esteve aqui a beber para ganhar coragem antes de sair... parecia nervoso. Já agora, falta-nos uma faca na cozinha, por acaso não a viu?
-Sem Abrigo:Por uma moeda digo-lhe o que vi... (pausa) Vi o Barbeiro a atirar algo para o chão e a fugir!
-Joel:Toda a gente devia dinheiro ao Barnabas. Ninguém vai chorar a morte dele.
+# DIÁLOGOS SIMPLES
+Cidadao:Ouvi vozes estranhas vindas do beco. Mas não consegui distinguir quem eram... talvez duas pessoas? Ou três? Estava muito confuso.
+Cao:Grrr... (O cão cheira o ar nervosamente e late para duas direções diferentes - o beco e o bar)
+
+# ==============================================
+# DIÁLOGOS INTERATIVOS - VERSÃO MISTERIOSA
+# ==============================================
+
+[DIALOGO_INTERATIVO]
+NPC:Inspetor Lestrade
+FALA_INICIAL:Sherlock, este caso é mais complicado do que parece. Barnabas foi esfaqueado, sim, mas há algo estranho... A cena parece demasiado óbvia. O que quer investigar?
+DESPEDIDA:Confio no seu instinto, Sherlock. Não se deixe enganar pelas aparências. A verdade está escondida nas sombras.
+OPCAO:Que evidências encontraram?|Uma faca da cozinha do bar da Irlinda e uma carta do Lucas. Mas algo não bate certo... as pegadas na lama não correspondem ao tamanho dos sapatos do Lucas.
+OPCAO:Há testemunhas?|Várias pessoas viram o Lucas nervoso naquela noite. Mas curiosamente, ninguém o viu entrar ou sair do beco. Apenas... depois. É estranho, não acha?
+OPCAO:Qual a hora estimada da morte?|O médico diz entre 21h45 e 22h15. Mas há algo peculiar - Barnabas tinha marcas de luta, mas nenhum ferimento defensivo nas mãos. Como se conhecesse o atacante.|PISTA:Vítima Conhecia o Assassino:Barnabas não se defendeu, sugerindo que conhecia e confiava no atacante.
+OPCAO:Alguém tinha motivo além do Lucas?|Essa é a questão... Toda a cidade odiava Barnabas. Mas o Lucas parece o suspeito perfeito. Perfeito demais. Investigue bem, Sherlock.
+[FIM_DIALOGO]
+
+[DIALOGO_INTERATIVO]
+NPC:Sr.Manuel
+FALA_INICIAL:Detetive! Que confusão terrível. Vi coisas estranhas naquela noite... Mas tenho medo de estar a acusar a pessoa errada. Posso confiar em si?
+DESPEDIDA:Tenha cuidado, detetive. Nem tudo o que brilha é ouro, e nem todos que parecem culpados o são.
+OPCAO:O que viu exatamente?|Vi alguém a correr, sim. Um vulto em direção à barbearia. Mas agora que penso melhor... vi DOIS vultos. O segundo foi em direção ao bar. Achei que estava a ver mal.|PISTA:Dois Vultos Diferentes:Manuel viu duas pessoas a fugir em direções opostas.
+OPCAO:Reconheceu algum dos vultos?|O primeiro parecia o Lucas... alto, magro. Mas o segundo era mais baixo, mais ágil. E foi ele que saiu primeiro do beco, não o Lucas!
+OPCAO:Alguém entrou no seu armazém?|Sim! Encontrei a porta entreaberta. E havia pegadas de lama lá dentro. Também encontrei um lenço com iniciais bordadas... "J.M.". Não sei de quem é.
+OPCAO:Reparou em algo no bar da Irlinda?|Agora que menciona... o Joel, o empregado dela, estava extremamente nervoso. Mais que o Lucas. Transpirava, olhava constantemente para a rua. Muito suspeito.
+[FIM_DIALOGO]
+
+[DIALOGO_INTERATIVO]
+NPC:Lucas
+FALA_INICIAL:Detetive, por favor! Eu sei como isto parece, mas não fui eu! Alguém está a armar-me uma cilada! A faca, a carta... foi tudo plantado! Tem de me acreditar!
+DESPEDIDA:Obrigado por me ouvir, detetive. Sei que parece que fui eu, mas juro pela minha vida que sou inocente. Encontre a verdade!
+OPCAO:Onde estava às 22h?|Eu SAÍ do bar às 21h30, mas não fui para casa! Fui à floresta para me acalmar. Estava desesperado com as dívidas. Quando voltei, havia polícia por todo o lado!
+OPCAO:Alguém pode confirmar que estava na floresta?|O Sem Abrigo viu-me a ir para lá! E... e encontrei algo estranho na floresta. Luvas ensanguentadas escondidas debaixo de folhas. Fiquei em pânico e deixei-as lá!|PISTA:Luvas na Floresta:Lucas encontrou luvas ensanguentadas escondidas na floresta.
+OPCAO:Porque estava tão nervoso no bar?|Porque recebi uma nota anónima debaixo da porta! Dizia "Vá ao bar hoje. Vá à floresta às 22h. Há uma solução para as suas dívidas". Achei que era o Barnabas a ameaçar-me!
+OPCAO:Viu Joel nessa noite?|Vi! Ele estava a limpar algo no balcão... parecia sangue? Mas pensei que fosse de carne ou algo assim. Ele olhou para mim de forma muito estranha quando saí.
+OPCAO:A carta no beco é sua?|Sim, mas eu nunca a levei para lá! Estava no meu bolso no casaco que deixei pendurado no bar! Alguém deve tê-la roubado enquanto estava lá!
+[FIM_DIALOGO]
+
+[DIALOGO_INTERATIVO]
+NPC:Mordomo
+FALA_INICIAL:Detetive, o Sr. Barnabas guardava muitos segredos. Eu servi esta família por 40 anos... Sei de coisas que poderiam chocar a cidade. Quer saber a verdade?
+DESPEDIDA:O passado tem um modo de nos alcançar, detetive. O Sr. Barnabas pagou pelos seus pecados... literalmente.
+OPCAO:Que segredos guardava?|Há 30 anos, o Sr. Barnabas teve um caso com uma jovem da cidade. Ela engravidou. Ele abandonou-a com dinheiro e desapareceu. Nunca soube do filho.|PISTA:Filho Secreto:Barnabas tinha um filho secreto de 30 anos que ele nunca conheceu.
+OPCAO:Quem era a mulher?|Não tenho certeza... Mas o Sr. Barnabas mencionou recentemente que a viu no bar da Sra. Irlinda. Disse que ela "envelheceu, mas os olhos continuam os mesmos". Parecia perturbado.
+OPCAO:Barnabas recebeu ameaças recentemente?|Sim! Cartas anónimas há três semanas. Diziam coisas como "Lembras-te de 1795?" e "Os pecados do pai caem sobre a família". Ele queimou-as, mas vi uma antes disso.
+OPCAO:Ele ia encontrar-se com alguém?|Sim... mas não sei com quem. Ele disse "Vou resolver um assunto do passado hoje à noite". Levou uma quantia enorme de dinheiro. Talvez 10.000 libras.
+OPCAO:Sabe algo sobre Joel, o empregado do bar?|Joel? Nunca o conheci pessoalmente. Mas o Sr. Barnabas mencionou uma vez que ele "tinha os olhos dela". Achei estranho na altura. Agora entendo.
+[FIM_DIALOGO]
+
+[DIALOGO_INTERATIVO]
+NPC:Sra.Irlinda
+FALA_INICIAL:Bem-vindo, detetive. Sim, foi uma noite horrível. O pobre Lucas... Ele é inocente, sabe? Mas às vezes os inocentes pagam pelos pecados dos outros...
+DESPEDIDA:A verdade é uma lâmina de dois gumes, detetive. Tenha cuidado com o que procura... pode não gostar do que encontra.
+OPCAO:Há quanto tempo conhece Barnabas?|Muito tempo... Mais de 30 anos. Éramos... próximos, uma vez. Mas ele era um homem ambicioso. Escolheu o dinheiro em vez de... outras coisas.
+OPCAO:O Lucas esteve aqui naquela noite?|Sim, estava nervoso. Mas o Joel também estava estranho. Muito mais que o normal. Ele desapareceu por uns 20 minutos entre as 21h30 e 22h. Disse que foi ao armazém.
+OPCAO:Quando descobriu que a faca desapareceu?|Três dias antes. Mas... confesso que não dei muita importância. Facas desaparecem. Agora percebo que deveria ter reportado à polícia.|PISTA:Faca Roubada Há Três Dias:A faca foi roubada três dias antes do crime, sugerindo premeditação.
+OPCAO:Conhecia os segredos de Barnabas?|Todos têm segredos, detetive. Barnabas tinha muitos. E sim... alguns eu conhecia. Mas um morto não pode falar, e eu não vou traí-lo agora.
+OPCAO:O Joel é seu filho?|Sim. Criei-o sozinha. O pai dele... bem, o pai nunca esteve presente. Joel cresceu a ver-me trabalhar até à exaustão. Ele merece melhor que isto.
+[FIM_DIALOGO]
+
+[DIALOGO_INTERATIVO]
+NPC:Sem Abrigo
+FALA_INICIAL:Ah, detetive... Eu durmo nas ruas. Vejo coisas que as pessoas acham que estão escondidas. Aquela noite foi... caótica. Tantas idas e vindas...
+DESPEDIDA:O mundo é cruel com os pobres, detetive. Mas também os torna invisíveis... e testemunhas perfeitas. Boa sorte.
+OPCAO:Quantas pessoas viu no beco?|Três! Primeiro entrou o Barnabas, bem vestido. Depois, 15 minutos mais tarde, outro homem - mais novo, mais baixo. Então, o Lucas chegou por último!|PISTA:Três Pessoas no Beco:O Sem Abrigo viu três pessoas diferentes entrarem no beco em momentos separados.
+OPCAO:Quem era o segundo homem?|Não vi o rosto... Mas tinha um avental manchado. Parecia vir da direção do bar. Saiu rapidamente, limpando algo nas mãos. Parecia... líquido escuro.
+OPCAO:O que aconteceu com o Lucas?|O Lucas chegou depois! Entrou no beco, ficou lá uns 2 minutos, e saiu a correr, aterrorizado. Gritava "Não! Não pode ser!". Correu para a floresta em pânico!
+OPCAO:Viu mais alguma coisa estranha?|Vi! O segundo homem deixou cair algo quando fugia - um papel pequeno. Apanhei-o. Tem uma letra: "21h45 - Beco - Traga o dinheiro - B". É uma caligrafia feminina.|PISTA:Nota Misteriosa:Alguém marcou um encontro com Barnabas usando caligrafia feminina.
+[FIM_DIALOGO]
+
+[DIALOGO_INTERATIVO]
+NPC:Joel
+FALA_INICIAL:Detetive. Imagino que tenha perguntas. Toda a gente parece ter nesta cidade. Mas será que está a fazer as perguntas certas?
+DESPEDIDA:Cuidado, detetive. Quando se procura monstros, é fácil tornar-se num. Boa sorte com as suas... conclusões.
+OPCAO:Onde estava entre 21h30 e 22h?|Estava a trabalhar. Fui ao armazém da loja ao lado buscar mais garrafas. Estava escuro, demorei um pouco. A Sra. Irlinda pode confirmar que voltei.
+OPCAO:Porque estava nervoso nessa noite?|Nervoso? Talvez. É difícil não ficar nervoso quando se trabalha até tarde num bar cheio de bêbados desesperados. O Lucas estava particularmente instável.
+OPCAO:Conhecia Barnabas pessoalmente?|Não. Quer dizer... vi-o algumas vezes no bar. Era arrogante, cruel. Tratava as pessoas como lixo. O mundo é melhor sem ele, se me permite a sinceridade.|PISTA:Joel Odiava Barnabas:Joel demonstrou ódio profundo por Barnabas, mais intenso que o normal.
+OPCAO:O que estava a limpar no balcão?|Sumo de tomate. Derramei uma garrafa. Porque pergunta? Acha que era sangue? Isso é ridículo, detetive. Insulta a minha inteligência.
+OPCAO:A Sra. Irlinda é sua mãe?|Sim. Ela sacrificou tudo por mim. Trabalhou sozinha, sem ajuda do meu pai - um covarde que nos abandonou. Faria qualquer coisa por ela. Qualquer coisa.
+OPCAO:Sabe quem é seu pai?|Não... a minha mãe nunca quis dizer. Dizia que ele não merecia ser parte da minha vida. Mas recentemente descobri algo... uns papéis antigos no sótão. Um nome: Barnabas.|PISTA:Joel Descobriu a Verdade:Joel descobriu recentemente que Barnabas era seu pai biológico.
+[FIM_DIALOGO]
+
+[DIALOGO_INTERATIVO]
+NPC:Cidadao
+FALA_INICIAL:Detetive! Moro aqui há 50 anos. Conheço todos nesta cidade. E aquela noite... algo estava errado. Muito errado.
+DESPEDIDA:Confie nos seus instintos, detetive. A verdade geralmente está onde menos esperamos.
+OPCAO:O que ouviu exatamente?|Vozes! Uma discussão acalorada. Mas não era entre duas pessoas... eram TRÊS vozes! Uma gritava, outra suplicava, e uma terceira... estava calma. Demasiado calma.|PISTA:Três Vozes no Beco:Havia três pessoas a discutir no beco, não duas.
+OPCAO:Reconheceu alguma voz?|A voz desesperada era do Lucas, tenho certeza. A voz gritona era de Barnabas. Mas a terceira... era mais jovem, calculista. Não reconheci.
+OPCAO:A que horas foi isto?|Começou às 21h50. A discussão durou cerca de 10 minutos. Depois ouvi um grito, silêncio, e passos a correr. Dois conjuntos de passos, não um!
+OPCAO:Viu alguém depois?|Vi o Lucas a correr para a floresta, aterrorizado. Mas antes disso, vi alguém mais baixo a sair pela direção do bar. Caminhava calmamente, como se nada tivesse acontecido.
+[FIM_DIALOGO]
+
+[DIALOGO_INTERATIVO]
+NPC:Cao
+FALA_INICIAL:Au au! (O cão está agitado, farejando o ar compulsivamente e apontando para duas direções - o beco e o bar)
+DESPEDIDA:Au! (O cão lambe a sua mão mas continua inquieto, como se soubesse que algo terrível aconteceu)
+OPCAO:Acalma-te. O que cheiras?|Grrr... Auf auf! (O cão corre até ao beco e cheira intensamente. Depois corre até à entrada do bar e late furiosamente. Claramente reconhece o mesmo cheiro nos dois locais!)|PISTA:Cheiro Conecta Bar e Beco:O cão detectou o mesmo cheiro no beco e no bar.
+OPCAO:Viste quem fez isto?|Grrrr! (O cão rosna para a direção do bar e arranha o chão nervosamente. Parece ter medo de alguém específico, não do Lucas)
+OPCAO:Mostra-me o que encontraste|Au au! (O cão corre até um canto escuro e usa a pata para revelar algo enterrado na terra - um avental manchado de sangue com o símbolo do bar da Irlinda!)|PISTA:Avental Ensanguentado:O cão encontrou um avental do bar escondido, manchado de sangue.
+[FIM_DIALOGO]

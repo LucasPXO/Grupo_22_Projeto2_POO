@@ -1,6 +1,4 @@
 public abstract class Entidade {
-    
-    // 1. MUDAR PARA PRIVATE (Encapsulamento Forte)
     private String nome; 
     
     public Entidade(String nome) {

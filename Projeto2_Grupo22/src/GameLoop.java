@@ -187,6 +187,13 @@ public class GameLoop {
         encerrar();
     }
     
+    /**
+     * Devolve a lista de todos os NPCs registados no jogo.
+     */
+    public List<NPC> getTodosNpcs() {
+        return this.todosNpcs;
+    }
+    
     private void encerrar() {
         scanner.close();
         System.out.println("Obrigado por jogar. Adeus!");
